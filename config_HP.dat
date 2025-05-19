@@ -1,0 +1,19 @@
+# Configuration File for Temperature and Timing Settings
+# Format: key = value 
+# Please keep the key names and use one decimal place for temperatures and whole numbers for time in seconds
+
+# --- Port Settings ---
+serial_port_HP = COM3		# COM port for controlling the heat plate
+serial_port_scales = COM6	# COM port for controlling the scales
+
+# --- Temperature Settings (in Celsius) ---
+base_temperature = 35.0      # Base temperature before start of experiment and during adaptation(limits: 10.0 - 45.0)
+peak_temperature = 47.0      # Peak temperature reached during the experiment (limits: 5.0 - 49.0) 
+
+# --- Timing Settings (in seconds) ---
+
+ramp_up_time_bt = 60		 # Time to reach base temperature
+hold_time_bt = 120  		 # Time to hold at base temperature (adaptation)
+ramp_up_time_pt = 156        # Time to reach peak temperature
+hold_time_pt = 0             # Time to hold at peak temperature
+ramp_down_time_bt = 300      # Time to reach base temperature after peak
