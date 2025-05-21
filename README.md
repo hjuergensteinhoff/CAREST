@@ -21,4 +21,6 @@ CAREST.psyexp was developed using the Psychopy software package (Peirce et al., 
 Relevant data are saved in a .csv output file. The name of the output file contains the participant and session numbers. Absolute times are included for all rows (i.e., in two-seconds-intervals), which facilitates subsequent linking of temperatures, hand-plate contact force, and VAS ratings with other assessment derived measures using external devices, such as time-stamped ECG.  The add-on program, plot_CAREST, where output files can be inserted via a drag-and-drop feature, plots contact force and VAS pain ratings vs temperature as well as ratings for the hypothetical vignettes, thus facilitating a quick check of data recorded during an individual experiment. 
 
 
- 
+ Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019), 
+ PsychoPy2: Experiments in behavior made easy Behav Res 51: 195. 
+ https://doi.org/10.3758/s13428-018-01193-y
