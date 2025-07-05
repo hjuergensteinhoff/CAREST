@@ -3,6 +3,9 @@ plot_CAREST
 by Heinz-Juergen Steinhoff, University Osnabrueck, Germany.
 Version 7, April 2025
 
+plot_CAREST displays the data from the CAREST output file (.csv) by drag and drop. 
+Pain threshold, pain tolerance and hand-plate contact force are calculated.
+
 Copyright (c) 2025 Heinz-Juergen Steinhoff
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this 
