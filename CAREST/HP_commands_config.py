@@ -19,7 +19,7 @@ ramp_down_time_bt (300 s) the plate is reset to base_temperature SV.
 For checking the proper function of the plate the temperature ramp 
 can be started and the actual temperature values (PV) are printed every 2 seconds.
 
-Copyright (c) 2025 Heinz-Juergen Steinhoff
+Copyright (c) 2025 Heinz-Juergen and Annekatrin Steinhoff
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 software and associated documentation files (the "Software"), to deal in the Software 
