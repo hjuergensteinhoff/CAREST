@@ -17,7 +17,7 @@ The ESP32-based scale interface runs the program 'scale.ino'. This program reads
 ### CAREST
 CAREST.psyexp was developed using the Psychopy software package (Peirce et al., 2019) using Code components for interaction with the plate and scale. The “library” “HP_commands_config.py” codes for the commands controlling and communicating with the ATEC302 temperature controller (commands were coded according to commands byte tables published in the ATEC302 TE Temperature Controller Reference Manual Rev 1.10, Mar, 2018, received from Thermoelectric Cooling America Corporation). It enables reading the user editable input file “config.dat” which contains the temperature and timing values for cold or heat pain experiments. Upon upload of the temperature and timing values to the ATEC temperature controller the plate is controlled to the baseline temperature. After an adaptation phase the temperature ramp is started. VAS pain ratings, hand-plate contact force and actual plate temperatures are recorded every two seconds during the adaptation and ramping phases. Relevant data are saved in a .csv output file. 
 
-The add-on program, plot_CAREST, where output files can be inserted via a drag-and-drop feature, plots contact force and VAS pain ratings vs temperature as well as ratings for hypothetical vignettes, thus facilitating a quick check of data recorded during an individual experiment. 
+The add-on program, plot_CAREST, where output files can be inserted via a drag-and-drop feature, plots contact force and VAS pain ratings vs temperature as well as ratings for hypothetical vignettes. 
 
  ### References
  Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019), 
