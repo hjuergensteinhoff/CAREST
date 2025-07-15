@@ -1,7 +1,6 @@
 # CAREST
 ## CAREST: Controlling and Recording Experiments in Sensitivity to Temperature
 
-**For details and citation, please see: H.J. Steinhoff and A. Steinhoff, CAREST: A Tool for Temperature Sensitivity Experiments with Adolescents Including Real-Time Recordings of Temperature, Contact Force, and Self-Ratings**
 
 
 **CAREST** is a PsychoPy-based tool for a reaction-time independent assessment of temperature and pain sensitivity via thermal induction. CAREST controls and communicates with a cold/hot plate (AHP 1200. Thermoelectric Cooling America Corporation, Chicago, USA) and provides a touchscreen slider to assess pain sensation on a Visual Analogue Scale (VAS). The plate is placed on a platform with load cells (M5Stack Technology Co., Ltd., China) measure hand-plate contact force, providing an objective assessment of thermal contact between hand and plate surface during the experiment. CAREST continuously records timestamped values of plate surface temperature, participants’ VAS rating and hand-plate contact force facilitating measures of temperature and pain sensitivity within a single experimental setting. 
