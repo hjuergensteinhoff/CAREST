@@ -4,7 +4,7 @@
 
 
 **CAREST** is a PsychoPy-based tool for the assessment of temperature and pain sensitivity via thermal induction. CAREST controls and communicates with a cold/hot plate (AHP 1200, Thermoelectric Cooling America Corporation, Chicago, USA) and provides a touchscreen slider to assess pain sensation on a Visual Analogue Scale (VAS). The plate is placed on a platform with load cells (M5Stack Technology Co., Ltd., China) to measure hand-plate contact force. CAREST continuously records timestamped values of plate surface temperature, participants’ VAS rating and hand-plate contact force facilitating measures of temperature and pain sensitivity. 
-The software package consists of CAREST.psyexp, HP_commands.py, config.dat, VAS.jpg, scale.ino and Plot_CAREST.py. The first four files have to be in the same folder. CAREST was developed using PsychoPy v2024.1.4., scale.ino was compiled with Arduino IDE 2.3.3. All tests were performed on a Windows 11 platform.
+The software package consists of CAREST.psyexp, HP_commands.py, config.dat, VAS.jpg, scale.ino and Plot_CAREST.py. The first four files have to be in the same folder. CAREST was developed using PsychoPy v2024.1.4., scale.ino was compiled with Arduino IDE 2.3.3. The program was developed on a Windows 11 platform.
 
 ## Hardware:
 
