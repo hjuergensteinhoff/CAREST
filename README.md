@@ -8,7 +8,7 @@ The software package consists of CAREST.psyexp, HP_commands.py, config.dat, VAS.
 
 ## Hardware:
 
-The experimental setup consists of an AHP-1200 cold/heat plate (Thermoelectric Cooling America Corporation, Chicago, USA) placed on a scale platform with four load cells (M5Stack Technology Co., Ltd., China). The analogue signals from the load cells are digitized by an HX711 24-bit A/D converter chip (M5Stack) and transmitted to a touchscreen laptop (Windows 11) via an ESP32 Basic Core IoT Development Kit V2.7 (M5Stack). The internal temperature controller (ATEC302) of the AHP-1200 cold/heat plate is connected to the second USB port of the laptop.
+The experimental setup consists of an AHP-1200 cold/heat plate (Thermoelectric Cooling America Corporation, Chicago, USA) placed on a scale platform with four load cells (M5Stack Technology Co., Ltd., China). The analogue signals from the load cells are digitized by an HX711 24-bit A/D converter chip (M5Stack) and transmitted to a touchscreen laptop (Windows 11) via an ESP32 Basic Core IoT Development Kit V2.7 (M5Stack). The internal temperature controller (ATEC302) of the AHP-1200 cold/heat plate is connected to the second USB port of the laptop. VAS rating is performed on the touchscreen laptop.
 
 ## Software:
 
