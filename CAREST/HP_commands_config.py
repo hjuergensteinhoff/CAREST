@@ -95,7 +95,7 @@ def load_config(file_path: str) -> ExperimentConfig:
             raise ValueError(f"peak_temperature {peak_temp} out of range (5.0 - 49.0)")
             sys.exit()
         if (peak_temp - base_temp) != 0:
-           ramp_spC = ramp_up_time_pt/(abs(peak_temp - base_temp))) # peak temperature ramp up time in seconds per degree Celsius
+           ramp_spC = ramp_up_time_pt/(abs(peak_temp - base_temp)) # peak temperature ramp up time in seconds per degree Celsius
            if not (ramp_spC >= 13.0):
               raise ValueError(f"ramp_up_time_pt/(pt-bt) is {ramp_spC:.1f}C, must be >= 13C")
               sys.exit()
