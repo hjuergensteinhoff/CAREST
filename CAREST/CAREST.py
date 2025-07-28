@@ -886,7 +886,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
        serscales.write(Scale_read_byte)
        serscales.flush()
        time.sleep(0.4)
-       serscale.readline()
+       serscales.readline()
     hpc.Start_ramp(ser)
     # keep track of which components have finished
     Start_rampComponents = [text_start_ramp]
