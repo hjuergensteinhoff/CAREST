@@ -646,7 +646,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="if (config.serial_port_scales) {&amp;#10;    serscales.write(Scale_read_byte);&amp;#10;    serscales.flush();&amp;#10;    time.sleep(0.4);&amp;#10;    serscale.readline();&amp;#10;}&amp;#10;new hpc.Start_ramp(ser);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if config.serial_port_scales:&amp;#10;   serscales.write(Scale_read_byte)&amp;#10;   serscales.flush()&amp;#10;   time.sleep(0.4)&amp;#10;   serscale.readline()&amp;#10;hpc.Start_ramp(ser)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if config.serial_port_scales:&amp;#10;   serscales.write(Scale_read_byte)&amp;#10;   serscales.flush()&amp;#10;   time.sleep(0.4)&amp;#10;   serscales.readline()&amp;#10;hpc.Start_ramp(ser)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
