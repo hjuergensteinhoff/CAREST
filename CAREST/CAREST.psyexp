@@ -34,6 +34,8 @@
     <Param val="{'thisRow.t': 'priority.CRITICAL', 'expName': 'priority.LOW'}" valType="dict" updates="None" name="colPriority"/>
     <Param val="0.9216, 0.9216, 0.7255" valType="color" updates="None" name="color"/>
     <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+    <Param val="warning" valType="code" updates="None" name="consoleLoggingLevel"/>
+    <Param val="default" valType="str" updates="None" name="ecSampleRate"/>
     <Param val="100.1.1.1" valType="str" updates="None" name="elAddress"/>
     <Param val="FILTER_LEVEL_2" valType="str" updates="None" name="elDataFiltering"/>
     <Param val="FILTER_LEVEL_OFF" valType="str" updates="None" name="elLiveFiltering"/>
@@ -87,6 +89,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="trial" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -100,6 +103,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -225,8 +229,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="rating_loop.addData(&quot;sliderRating.markerPos&quot;, sliderRating.getMarkerPos());&amp;#10;if ((slider_stop.getRating() === 2)) {&amp;#10;    new hpc.Stop_ramp(ser);&amp;#10;    new hpc.Ctrl_tempON(ser);&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="rating_loop.addData('sliderRating.markerPos', sliderRating.getMarkerPos())&amp;#10;#Finish experiment with slider_stop&amp;#10;if slider_stop.getRating() == 2 :&amp;#10;    hpc.Stop_ramp(ser)&amp;#10;    hpc.Ctrl_tempON(ser)&amp;#10;    rating_loop.finished = 1" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="rating_loop.addData(&quot;sliderRating.markerPos&quot;, sliderRating.getMarkerPos());&amp;#10;if ((slider_stop.getRating() === 2)) {&amp;#10;    new hpc.Stop_ramp(ser);&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="rating_loop.addData('sliderRating.markerPos', sliderRating.getMarkerPos())&amp;#10;#Finish experiment with slider_stop&amp;#10;if slider_stop.getRating() == 2 :&amp;#10;    hpc.Stop_ramp(ser)&amp;#10;    rating_loop.finished = 1" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_marker_save" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -235,8 +239,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((newClock.getTime() &gt;= 360)) {&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if newClock.getTime() &gt;= 360:&amp;#10;    rating_loop.finished = 1" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((newClock.getTime() &gt;= ramp_up_time_total)) {&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if newClock.getTime() &gt;= ramp_up_time_total:&amp;#10;    rating_loop.finished = 1" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -257,6 +261,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="GoodbyScreen" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -269,6 +274,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -300,6 +306,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="WelcomeScreen" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -312,6 +319,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -380,6 +388,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="TrialTest" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -393,6 +402,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -457,6 +467,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -525,6 +536,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="endtrial" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -538,6 +550,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -565,6 +578,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -633,6 +647,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="Start_ramp" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -662,6 +677,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -710,6 +726,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="StandbyScreen" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -718,8 +735,8 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <CodeComponent name="code_bf_exp" plugin="None">
-        <Param val="import serial&amp;#10;import time&amp;#10;import struct&amp;#10;import HP_commands_config as hpc&amp;#10;newClock = core.Clock()&amp;#10;# Setup serial port for heat plate&amp;#10;# Load config file parameters&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;)&amp;#10;ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)&amp;#10;ser.reset_input_buffer()&amp;#10;ser.reset_output_buffer()&amp;#10;time.sleep(0.05)&amp;#10;# Setup serial port for scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales = serial.Serial(config.serial_port_scales, baudrate = 19200, timeout = 1)&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.05)&amp;#10;   # Bytes to tare and read the scales&amp;#10;   Scale_tare_byte = bytes([0x30])&amp;#10;   Scale_read_byte = bytes([0x0D])&amp;#10;   # Tare the scales&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;else:&amp;#10;   print(f&quot; Serial scales port is not available &quot;)&amp;#10;# Prepare the HP controller&amp;#10;# Stop ramp if still running from previous experiment&amp;#10;hpc.Stop_ramp(ser)&amp;#10;# Set and control to SV &amp;#10;hpc.Set_SV(ser, config)&amp;#10;hpc.Ctrl_tempON(ser)&amp;#10;# Set parameters for temperature ramp&amp;#10;hpc.Set_ramp_val(ser, config)" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="import * as serial from 'serial';&amp;#10;import * as time from 'time';&amp;#10;import * as struct from 'struct';&amp;#10;import * as hpc from 'HP_commands_config';&amp;#10;newClock = new util.Clock();&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;);&amp;#10;ser = new serial.Serial(config.serial_port_HP, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;ser.reset_input_buffer();&amp;#10;ser.reset_output_buffer();&amp;#10;time.sleep(0.05);&amp;#10;if (config.serial_port_scales) {&amp;#10;    serscales = new serial.Serial(config.serial_port_scales, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.05);&amp;#10;    Scale_tare_byte = bytes([48]);&amp;#10;    Scale_read_byte = bytes([13]);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;} else {&amp;#10;    console.log(` Serial scales port is not available `);&amp;#10;}&amp;#10;new hpc.Stop_ramp(ser);&amp;#10;new hpc.Set_SV(ser, config);&amp;#10;new hpc.Ctrl_tempON(ser);&amp;#10;new hpc.Set_ramp_val(ser, config);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="# v_19.08.2025&amp;#10;import serial&amp;#10;import time&amp;#10;import struct&amp;#10;import HP_commands_config as hpc&amp;#10;newClock = core.Clock()&amp;#10;# Setup serial port for heat plate&amp;#10;# Load config file parameters&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;)&amp;#10;ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)&amp;#10;ser.reset_input_buffer()&amp;#10;ser.reset_output_buffer()&amp;#10;time.sleep(0.05)&amp;#10;# Setup serial port for scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales = serial.Serial(config.serial_port_scales, baudrate = 19200, timeout = 1)&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.05)&amp;#10;   # Bytes to tare and read the scales&amp;#10;   Scale_tare_byte = bytes([0x30])&amp;#10;   Scale_read_byte = bytes([0x0D])&amp;#10;   # Tare the scales&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;else:&amp;#10;   print(f&quot; Serial scales port is not available &quot;)&amp;#10;# Prepare the HP controller&amp;#10;# Stop ramp if still running from previous experiment&amp;#10;hpc.Stop_ramp(ser)&amp;#10;# Set and control to SV &amp;#10;hpc.Set_SV(ser, config)&amp;#10;hpc.Ctrl_tempON(ser)&amp;#10;# Set parameters for temperature ramp&amp;#10;hpc.Set_ramp_val(ser, config)&amp;#10;# Calculate total ramp_up_time&amp;#10;ramp_up_time_total = (config.ramp_up_time_bt + &amp;#10;                     config.ramp_up_time_pt + &amp;#10;                     config.hold_time_bt + &amp;#10;                     config.hold_time_pt&amp;#10;                     )&amp;#10;print(f&quot;The time from start to end of the temperature ramp is {ramp_up_time_total} s&quot;)&amp;#10;rating_loop_rep_num = int(ramp_up_time_total / 2)&amp;#10;print(f&quot;The maximum number of repeats of the rating loop is {rating_loop_rep_num}&quot;)" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import * as serial from 'serial';&amp;#10;import * as time from 'time';&amp;#10;import * as struct from 'struct';&amp;#10;import * as hpc from 'HP_commands_config';&amp;#10;newClock = new util.Clock();&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;);&amp;#10;ser = new serial.Serial(config.serial_port_HP, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;ser.reset_input_buffer();&amp;#10;ser.reset_output_buffer();&amp;#10;time.sleep(0.05);&amp;#10;if (config.serial_port_scales) {&amp;#10;    serscales = new serial.Serial(config.serial_port_scales, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.05);&amp;#10;    Scale_tare_byte = bytes([48]);&amp;#10;    Scale_read_byte = bytes([13]);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;} else {&amp;#10;    console.log(` Serial scales port is not available `);&amp;#10;}&amp;#10;new hpc.Stop_ramp(ser);&amp;#10;new hpc.Set_SV(ser, config);&amp;#10;new hpc.Ctrl_tempON(ser);&amp;#10;new hpc.Set_ramp_val(ser, config);&amp;#10;ramp_up_time_total = (((config.ramp_up_time_bt + config.ramp_up_time_pt) + config.hold_time_bt) + config.hold_time_pt);&amp;#10;console.log(`The time from start to end of the temperature ramp is ${ramp_up_time_total} s`);&amp;#10;rating_loop_rep_num = Number.parseInt((ramp_up_time_total / 2));&amp;#10;console.log(`The maximum number of repeats of the rating loop is ${rating_loop_rep_num}`);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
@@ -739,6 +756,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -807,6 +825,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="CalibrateScales" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -819,6 +838,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -867,6 +887,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="VASexercise1" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -880,6 +901,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -981,6 +1003,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -1012,6 +1035,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="VASexercise2" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -1025,6 +1049,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -1126,6 +1151,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -1157,6 +1183,7 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="VASexercise3" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -1170,6 +1197,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -1271,6 +1299,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -1309,7 +1338,7 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="180" valType="num"/>
+      <Param name="nReps" updates="None" val="rating_loop_rep_num" valType="num"/>
       <Param name="name" updates="None" val="rating_loop" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
