@@ -19,7 +19,22 @@ CAREST.psyexp was developed using the Psychopy software package (Peirce et al., 
 
 The add-on program, plot_CAREST, where output files can be inserted via a drag-and-drop feature, plots contact force and VAS pain ratings vs temperature as well as ratings for hypothetical vignettes. 
 
- ### References
- Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019), 
- PsychoPy2: Experiments in behavior made easy Behav Res 51: 195. 
- https://doi.org/10.3758/s13428-018-01193-y
+### References
+Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019), 
+PsychoPy2: Experiments in behavior made easy Behav Res 51: 195. 
+https://doi.org/10.3758/s13428-018-01193-y
+
+## Downloads
+
+You can download specific versions directly here:
+
+- [Download v1.0.1 (latest)](https://github.com/hjuergensteinhoff/CAREST/archive/refs/tags/v1.0.1.zip)
+- [Download v1.0.0 (previous)](https://github.com/hjuergensteinhoff/CAREST/archive/refs/tags/v1.0.0.zip)
+
+For all versions, see the [Releases page](https://github.com/hjuergensteinhoff/CAREST/releases).
+
+## Authors
+
+- Heinz-Juergen Steinhoff — software and hardware  
+- Annekatrin Steinhoff — study and experimental design, data analysis  
+
