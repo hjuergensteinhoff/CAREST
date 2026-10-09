@@ -3,7 +3,7 @@
 
 
 
-**CAREST** is a PsychoPy-based tool for the assessment of temperature and pain sensitivity via thermal induction. CAREST controls and communicates with a cold/hot plate (AHP 1200, Thermoelectric Cooling America Corporation, Chicago, USA) and provides a touchscreen slider to assess pain sensation on a Visual Analogue Scale (VAS). The plate is placed on a platform with load cells (M5Stack Technology Co., Ltd., China) to measure hand-plate contact force. CAREST continuously records timestamped values of plate surface temperature, participants’ VAS rating and hand-plate contact force facilitating measures of temperature and pain sensitivity. 
+**CAREST** is a PsychoPy-based tool for the assessment of temperature and pain sensitivity via thermal induction [1,2](#references). CAREST controls and communicates with a cold/hot plate (AHP 1200, Thermoelectric Cooling America Corporation, Chicago, USA) and provides a touchscreen slider to assess pain sensation on a Visual Analogue Scale (VAS). The plate is placed on a platform with load cells (M5Stack Technology Co., Ltd., China) to measure hand-plate contact force. CAREST continuously records timestamped values of plate surface temperature, participants’ VAS rating and hand-plate contact force facilitating measures of temperature and pain sensitivity. 
 The software package consists of CAREST.psyexp, HP_commands.py, config.dat, VAS.jpg, scale.ino and Plot_CAREST.py. The first four files have to be in the same folder. CAREST was developed using PsychoPy v2024.1.4., scale.ino was compiled with Arduino IDE 2.3.3. The program was developed on a Windows 11 platform.
 
 ## Hardware:
@@ -20,9 +20,14 @@ CAREST.psyexp was developed using the Psychopy software package (Peirce et al., 
 The add-on program, plot_CAREST, where output files can be inserted via a drag-and-drop feature, plots contact force and VAS pain ratings vs temperature as well as ratings for hypothetical vignettes. 
 
 ### References
+Steinhoff HJ, Prenaj B, Kuebel SL, Steinhoff A. (2026),
+Real-Time Assessment of Temperature Sensitivity, Pain Processing and Pain Behavior Across the Lifespan: Integrating Stimulus Data, Contact Force, and Subjective Ratings. Behavior Research Methods, in press
+https://doi.org/10.3758/s13428-026-03192-w
+
 Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019), 
 PsychoPy2: Experiments in behavior made easy Behav Res 51: 195. 
 https://doi.org/10.3758/s13428-018-01193-y
+
 
 ## Downloads
 
