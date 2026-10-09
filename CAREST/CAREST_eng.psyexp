@@ -34,8 +34,6 @@
     <Param val="{'thisRow.t': 'priority.CRITICAL', 'expName': 'priority.LOW'}" valType="dict" updates="None" name="colPriority"/>
     <Param val="0.9216, 0.9216, 0.7255" valType="color" updates="None" name="color"/>
     <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
-    <Param val="warning" valType="code" updates="None" name="consoleLoggingLevel"/>
-    <Param val="default" valType="str" updates="None" name="ecSampleRate"/>
     <Param val="100.1.1.1" valType="str" updates="None" name="elAddress"/>
     <Param val="FILTER_LEVEL_2" valType="str" updates="None" name="elDataFiltering"/>
     <Param val="FILTER_LEVEL_OFF" valType="str" updates="None" name="elLiveFiltering"/>
@@ -89,7 +87,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="trial" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -103,11 +100,10 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
-        <Param val="VAS_as_v3.jpg" valType="file" updates="constant" name="image"/>
+        <Param val="VAS_as_en_v3.jpg" valType="file" updates="constant" name="image"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="" valType="str" updates="constant" name="mask"/>
         <Param val="imageSliderRating" valType="code" updates="None" name="name"/>
@@ -230,7 +226,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="rating_loop.addData(&quot;sliderRating.markerPos&quot;, sliderRating.getMarkerPos());&amp;#10;if ((slider_stop.getRating() === 2)) {&amp;#10;    new hpc.Stop_ramp(ser);&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="rating_loop.addData('sliderRating.markerPos', sliderRating.getMarkerPos())&amp;#10;#Finish experiment with slider_stop&amp;#10;if slider_stop.getRating() == 2 :&amp;#10;    hpc.Stop_ramp(ser)&amp;#10;    rating_loop.finished = 1" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="rating_loop.addData('sliderRating.markerPos', sliderRating.getMarkerPos())&amp;#10;#Finish experiment with slider_stop&amp;#10;if slider_stop.getRating() == 2 :&amp;#10;    hpc.Stop_ramp(ser)&amp;#10;    &amp;#10;    rating_loop.finished = 1" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_marker_save" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -239,63 +235,18 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((newClock.getTime() &gt;= ramp_up_time_total)) {&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if newClock.getTime() &gt;= ramp_up_time_total:&amp;#10;    rating_loop.finished = 1" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((newClock.getTime() &gt;= 360)) {&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if newClock.getTime() &gt;= 360:&amp;#10;    rating_loop.finished = 1&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="psychoJS.experiment.saveAsWideText(&quot;CAREST_temporary_results&quot;, {&quot;fileCollisionMethod&quot;: &quot;overwrite&quot;, &quot;delim&quot;: &quot;,&quot;});&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="thisExp.saveAsWideText('CAREST_temporary_results', fileCollisionMethod='overwrite', delim=',')" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_clockGetTime" valType="code" updates="None" name="name"/>
       </CodeComponent>
-    </Routine>
-    <Routine name="GoodbyScreen">
-      <RoutineSettingsComponent name="GoodbyScreen" plugin="None">
-        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
-        <Param val="" valType="str" updates="None" name="backgroundImg"/>
-        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
-        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
-        <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
-        <Param val="GoodbyScreen" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="constant" name="skipIf"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
-      </RoutineSettingsComponent>
-      <TextComponent name="text" plugin="None">
-        <Param val="black" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="text" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="10.0" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Thank you for your participation!" valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
     </Routine>
     <Routine name="WelcomeScreen">
       <RoutineSettingsComponent name="WelcomeScreen" plugin="None">
@@ -306,7 +257,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="WelcomeScreen" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -319,7 +269,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -336,12 +285,12 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Welcome&amp;#10;&amp;#10;Please put your hand flat onto the plate surface" valType="str" updates="constant" name="text"/>
+        <Param val="Welcome to the thermal plate experiment.&amp;#10;&amp;#10;You can now place your hand on the plate." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <SliderComponent name="slider_continue" plugin="None">
+      <SliderComponent name="slider_cont" plugin="None">
         <Param val="White" valType="color" updates="constant" name="borderColor"/>
         <Param val="LightGray" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -354,15 +303,15 @@
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="0" valType="num" updates="constant" name="granularity"/>
         <Param val="1" valType="code" updates="None" name="initVal"/>
-        <Param val="'0', 'continue'" valType="list" updates="constant" name="labels"/>
+        <Param val="'0','Continue'" valType="list" updates="constant" name="labels"/>
         <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="slider_continue" valType="code" updates="None" name="name"/>
+        <Param val="slider_cont" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(-0.4, -0.4)" valType="list" updates="constant" name="pos"/>
         <Param val="False" valType="bool" updates="constant" name="readOnly"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(0.4, 0.1)" valType="list" updates="constant" name="size"/>
+        <Param val="(0.5, 0.1)" valType="list" updates="constant" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
@@ -388,7 +337,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="TrialTest" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -402,7 +350,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -467,7 +414,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -536,7 +482,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="endtrial" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -550,7 +495,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
@@ -578,7 +522,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -647,7 +590,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="Start_ramp" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -677,7 +619,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -726,7 +667,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="StandbyScreen" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -735,8 +675,8 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <CodeComponent name="code_bf_exp" plugin="None">
-        <Param val="# v_19.08.2025&amp;#10;import serial&amp;#10;import time&amp;#10;import struct&amp;#10;import HP_commands_config as hpc&amp;#10;newClock = core.Clock()&amp;#10;# Setup serial port for heat plate&amp;#10;# Load config file parameters&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;)&amp;#10;ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)&amp;#10;ser.reset_input_buffer()&amp;#10;ser.reset_output_buffer()&amp;#10;time.sleep(0.05)&amp;#10;# Setup serial port for scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales = serial.Serial(config.serial_port_scales, baudrate = 19200, timeout = 1)&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.05)&amp;#10;   # Bytes to tare and read the scales&amp;#10;   Scale_tare_byte = bytes([0x30])&amp;#10;   Scale_read_byte = bytes([0x0D])&amp;#10;   # Tare the scales&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;else:&amp;#10;   print(f&quot; Serial scales port is not available &quot;)&amp;#10;# Prepare the HP controller&amp;#10;# Stop ramp if still running from previous experiment&amp;#10;hpc.Stop_ramp(ser)&amp;#10;# Set and control to SV &amp;#10;hpc.Set_SV(ser, config)&amp;#10;hpc.Ctrl_tempON(ser)&amp;#10;# Set parameters for temperature ramp&amp;#10;hpc.Set_ramp_val(ser, config)&amp;#10;# Calculate total ramp_up_time&amp;#10;ramp_up_time_total = (config.ramp_up_time_bt + &amp;#10;                     config.ramp_up_time_pt + &amp;#10;                     config.hold_time_bt + &amp;#10;                     config.hold_time_pt&amp;#10;                     )&amp;#10;print(f&quot;The time from start to end of the temperature ramp is {ramp_up_time_total} s&quot;)&amp;#10;rating_loop_rep_num = int(ramp_up_time_total / 2)&amp;#10;print(f&quot;The maximum number of repeats of the rating loop is {rating_loop_rep_num}&quot;)" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="import * as serial from 'serial';&amp;#10;import * as time from 'time';&amp;#10;import * as struct from 'struct';&amp;#10;import * as hpc from 'HP_commands_config';&amp;#10;newClock = new util.Clock();&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;);&amp;#10;ser = new serial.Serial(config.serial_port_HP, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;ser.reset_input_buffer();&amp;#10;ser.reset_output_buffer();&amp;#10;time.sleep(0.05);&amp;#10;if (config.serial_port_scales) {&amp;#10;    serscales = new serial.Serial(config.serial_port_scales, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.05);&amp;#10;    Scale_tare_byte = bytes([48]);&amp;#10;    Scale_read_byte = bytes([13]);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;} else {&amp;#10;    console.log(` Serial scales port is not available `);&amp;#10;}&amp;#10;new hpc.Stop_ramp(ser);&amp;#10;new hpc.Set_SV(ser, config);&amp;#10;new hpc.Ctrl_tempON(ser);&amp;#10;new hpc.Set_ramp_val(ser, config);&amp;#10;ramp_up_time_total = (((config.ramp_up_time_bt + config.ramp_up_time_pt) + config.hold_time_bt) + config.hold_time_pt);&amp;#10;console.log(`The time from start to end of the temperature ramp is ${ramp_up_time_total} s`);&amp;#10;rating_loop_rep_num = Number.parseInt((ramp_up_time_total / 2));&amp;#10;console.log(`The maximum number of repeats of the rating loop is ${rating_loop_rep_num}`);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="# Version 1.0.2&amp;#10;import serial&amp;#10;import time&amp;#10;import struct&amp;#10;import HP_commands_config as hpc&amp;#10;newClock = core.Clock()&amp;#10;# Setup serial port for heat plate&amp;#10;# Load config file parameters&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;)&amp;#10;ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)&amp;#10;ser.reset_input_buffer()&amp;#10;ser.reset_output_buffer()&amp;#10;time.sleep(0.05)&amp;#10;# Setup serial port for scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales = serial.Serial(config.serial_port_scales, baudrate = 19200, timeout = 1)&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.05)&amp;#10;   # Bytes to tare and read the scales&amp;#10;   Scale_tare_byte = bytes([0x30])&amp;#10;   Scale_read_byte = bytes([0x0D])&amp;#10;   # Tare the scales&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;else:&amp;#10;   print(f&quot; Serial scales port is not available &quot;)&amp;#10;# Prepare the HP controller&amp;#10;# Stop ramp if still running from previous experiment&amp;#10;hpc.Stop_ramp(ser)&amp;#10;# Set and control to SV &amp;#10;hpc.Set_SV(ser, config)&amp;#10;hpc.Ctrl_tempON(ser)&amp;#10;# Set parameters for temperature ramp&amp;#10;hpc.Set_ramp_val(ser, config)" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import * as serial from 'serial';&amp;#10;import * as time from 'time';&amp;#10;import * as struct from 'struct';&amp;#10;import * as hpc from 'HP_commands_config';&amp;#10;newClock = new util.Clock();&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;);&amp;#10;ser = new serial.Serial(config.serial_port_HP, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;ser.reset_input_buffer();&amp;#10;ser.reset_output_buffer();&amp;#10;time.sleep(0.05);&amp;#10;if (config.serial_port_scales) {&amp;#10;    serscales = new serial.Serial(config.serial_port_scales, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.05);&amp;#10;    Scale_tare_byte = bytes([48]);&amp;#10;    Scale_read_byte = bytes([13]);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;} else {&amp;#10;    console.log(` Serial scales port is not available `);&amp;#10;}&amp;#10;new hpc.Stop_ramp(ser);&amp;#10;new hpc.Set_SV(ser, config);&amp;#10;new hpc.Ctrl_tempON(ser);&amp;#10;new hpc.Set_ramp_val(ser, config);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
@@ -756,7 +696,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
@@ -816,68 +755,6 @@
         <Param val="" valType="code" updates="None" name="validator"/>
       </SliderComponent>
     </Routine>
-    <Routine name="CalibrateScales">
-      <RoutineSettingsComponent name="CalibrateScales" plugin="None">
-        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
-        <Param val="" valType="str" updates="None" name="backgroundImg"/>
-        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
-        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
-        <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
-        <Param val="CalibrateScales" valType="code" updates="None" name="name"/>
-        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="constant" name="skipIf"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
-      </RoutineSettingsComponent>
-      <TextComponent name="text_calibrateScales" plugin="None">
-        <Param val="black" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.08" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="text_calibrateScales" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, 0.1)" valType="list" updates="constant" name="pos"/>
-        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="5" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Please do not touch the plate!&amp;#10;&amp;#10;Scales are being calibrated." valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
-      <CodeComponent name="code_calibrateScales" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="if (config.serial_port_scales) {&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.1);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;    time.sleep(0.1);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="# Tare the scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.1)&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;   time.sleep(0.1)" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="code_calibrateScales" valType="code" updates="None" name="name"/>
-      </CodeComponent>
-    </Routine>
     <Routine name="VASexercise1">
       <RoutineSettingsComponent name="VASexercise1" plugin="None">
         <Param val="none" valType="str" updates="None" name="backgroundFit"/>
@@ -887,7 +764,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="VASexercise1" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -901,11 +777,10 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
-        <Param val="VAS_as_v3.jpg" valType="file" updates="constant" name="image"/>
+        <Param val="VAS_as_en_v3.jpg" valType="file" updates="constant" name="image"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="" valType="str" updates="constant" name="mask"/>
         <Param val="imageSliderRating_VASex1" valType="code" updates="None" name="name"/>
@@ -961,7 +836,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </SliderComponent>
-      <SliderComponent name="slider_VASex1_continue" plugin="None">
+      <SliderComponent name="slider_VASex1_cont" plugin="None">
         <Param val="White" valType="color" updates="constant" name="borderColor"/>
         <Param val="Gray" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -974,9 +849,9 @@
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="0" valType="num" updates="constant" name="granularity"/>
         <Param val="1" valType="code" updates="None" name="initVal"/>
-        <Param val="' ','continue'" valType="list" updates="constant" name="labels"/>
+        <Param val="' ','Continue'" valType="list" updates="constant" name="labels"/>
         <Param val="0.015" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="slider_VASex1_continue" valType="code" updates="None" name="name"/>
+        <Param val="slider_VASex1_cont" valType="code" updates="None" name="name"/>
         <Param val="0.2" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0.45, 0.45)" valType="list" updates="constant" name="pos"/>
@@ -1003,7 +878,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -1020,7 +894,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="100" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Exercise 1" valType="str" updates="constant" name="text"/>
+        <Param val="Practice 1" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
@@ -1035,7 +909,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="VASexercise2" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -1049,11 +922,10 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
-        <Param val="VAS_as_v3.jpg" valType="file" updates="constant" name="image"/>
+        <Param val="VAS_as_en_v3.jpg" valType="file" updates="constant" name="image"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="" valType="str" updates="constant" name="mask"/>
         <Param val="imageSliderRating_VASex2" valType="code" updates="None" name="name"/>
@@ -1109,7 +981,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </SliderComponent>
-      <SliderComponent name="slider_VASex2_continue" plugin="None">
+      <SliderComponent name="slider_VASex2_cont" plugin="None">
         <Param val="White" valType="color" updates="constant" name="borderColor"/>
         <Param val="Gray" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -1122,9 +994,9 @@
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="0" valType="num" updates="constant" name="granularity"/>
         <Param val="1" valType="code" updates="None" name="initVal"/>
-        <Param val="' ','continue'" valType="list" updates="constant" name="labels"/>
+        <Param val="' ','Continue'" valType="list" updates="constant" name="labels"/>
         <Param val="0.015" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="slider_VASex2_continue" valType="code" updates="None" name="name"/>
+        <Param val="slider_VASex2_cont" valType="code" updates="None" name="name"/>
         <Param val="0.2" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0.45, 0.45)" valType="list" updates="constant" name="pos"/>
@@ -1151,7 +1023,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -1168,7 +1039,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="30" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Exercise 2" valType="str" updates="constant" name="text"/>
+        <Param val="Practice 2" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
@@ -1183,7 +1054,6 @@
         <Param val="" valType="str" updates="constant" name="desc"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
         <Param val="VASexercise3" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
@@ -1197,11 +1067,10 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
-        <Param val="VAS_as_v3.jpg" valType="file" updates="constant" name="image"/>
+        <Param val="VAS_as_en_v3.jpg" valType="file" updates="constant" name="image"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="" valType="str" updates="constant" name="mask"/>
         <Param val="imageSliderRating_VASex3" valType="code" updates="None" name="name"/>
@@ -1257,7 +1126,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </SliderComponent>
-      <SliderComponent name="slider_VASex3_continue" plugin="None">
+      <SliderComponent name="slider_VASex3_cont" plugin="None">
         <Param val="White" valType="color" updates="constant" name="borderColor"/>
         <Param val="Gray" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -1270,9 +1139,9 @@
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="0" valType="num" updates="constant" name="granularity"/>
         <Param val="1" valType="code" updates="None" name="initVal"/>
-        <Param val="' ','continue'" valType="list" updates="constant" name="labels"/>
+        <Param val="' ','Continue'" valType="list" updates="constant" name="labels"/>
         <Param val="0.015" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="slider_VASex3_continue" valType="code" updates="None" name="name"/>
+        <Param val="slider_VASex3_cont" valType="code" updates="None" name="name"/>
         <Param val="0.2" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0.45, 0.45)" valType="list" updates="constant" name="pos"/>
@@ -1299,7 +1168,6 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -1316,7 +1184,273 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="30" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Exercise 3" valType="str" updates="constant" name="text"/>
+        <Param val="Practice 3" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="ReadScales">
+      <RoutineSettingsComponent name="ReadScales" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="ReadScales" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text_calibrateScales_2" plugin="None">
+        <Param val="red" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.08" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_calibrateScales_2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0.1)" valType="list" updates="constant" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="3" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Do not touch the plate!&amp;#10;&amp;#10;The scale is being calibrated." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <CodeComponent name="first_readScales" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="if (config.serial_port_scales) {&amp;#10;    serscales.reset_input_buffer();&amp;#10;    time.sleep(0.1);&amp;#10;    serscales.write(Scale_read_byte);&amp;#10;    serscales.flush();&amp;#10;    time.sleep(0.1);&amp;#10;    cf_bytes_read = serscales.readline();&amp;#10;    decoded_cf_string = cf_bytes_read.decode(&quot;latin-1&quot;);&amp;#10;    cleaned_cf_string = decoded_cf_string.strip();&amp;#10;    psychoJS.experiment.addData(&quot;first_contact_force&quot;, cleaned_cf_string);&amp;#10;} else {&amp;#10;    psychoJS.experiment.addData(&quot;first_contact_force&quot;, null);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="# Read the scales for the first time&amp;#10;if config.serial_port_scales:&amp;#10;   serscales.reset_input_buffer()&amp;#10;   time.sleep(0.1)&amp;#10;   serscales.write(Scale_read_byte)&amp;#10;   serscales.flush()&amp;#10;   time.sleep(0.1)&amp;#10;   cf_bytes_read = serscales.readline()&amp;#10;   decoded_cf_string = cf_bytes_read.decode('latin-1')&amp;#10;   cleaned_cf_string = decoded_cf_string.strip()&amp;#10;   thisExp.addData('first_contact_force', cleaned_cf_string)&amp;#10;else:&amp;#10;   thisExp.addData('first_contact_force', None)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="first_readScales" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="TareScales">
+      <RoutineSettingsComponent name="TareScales" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="TareScales" valType="code" updates="None" name="name"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text_calibrateScales" plugin="None">
+        <Param val="red" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.08" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_calibrateScales" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0.1)" valType="list" updates="constant" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="3" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Do not touch the plate!&amp;#10;&amp;#10;The scale is being calibrated." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <CodeComponent name="code_tareScales" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="if (config.serial_port_scales) {&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.1);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;    time.sleep(0.1);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="# Tare the scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.1)&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;   time.sleep(0.1)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_tareScales" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="Final_readScales">
+      <RoutineSettingsComponent name="Final_readScales" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Final_readScales" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text_readScales" plugin="None">
+        <Param val="red" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.08" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_readScales" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="5.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Do not touch the plate!&amp;#10;&amp;#10;The scale is being read." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <CodeComponent name="last_readScales" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="if (config.serial_port_scales) {&amp;#10;    serscales.reset_input_buffer();&amp;#10;    time.sleep(0.1);&amp;#10;    serscales.write(Scale_read_byte);&amp;#10;    serscales.flush();&amp;#10;    time.sleep(0.1);&amp;#10;    cf_bytes_read = serscales.readline();&amp;#10;    decoded_cf_string = cf_bytes_read.decode(&quot;latin-1&quot;);&amp;#10;    cleaned_cf_string = decoded_cf_string.strip();&amp;#10;    psychoJS.experiment.addData(&quot;last_contact_force&quot;, cleaned_cf_string);&amp;#10;} else {&amp;#10;    psychoJS.experiment.addData(&quot;last_contact_force&quot;, null);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="# Read the scales for the last time&amp;#10;if config.serial_port_scales:&amp;#10;   serscales.reset_input_buffer()&amp;#10;   time.sleep(0.1)&amp;#10;   serscales.write(Scale_read_byte)&amp;#10;   serscales.flush()&amp;#10;   time.sleep(0.1)&amp;#10;   cf_bytes_read = serscales.readline()&amp;#10;   decoded_cf_string = cf_bytes_read.decode('latin-1')&amp;#10;   cleaned_cf_string = decoded_cf_string.strip()&amp;#10;   thisExp.addData('last_contact_force', cleaned_cf_string)&amp;#10;else:&amp;#10;   thisExp.addData('last_contact_force', None)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="last_readScales" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="Goodbye">
+      <RoutineSettingsComponent name="Goodbye" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Goodbye" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text_Goodbye" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.08" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_Goodbye" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="10.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Thank you for participating!" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="Hands_off">
+      <RoutineSettingsComponent name="Hands_off" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Hands_off" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text_handsOff" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.08" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_handsOff" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="10.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Please remove your hand from the plate" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
@@ -1325,7 +1459,8 @@
   </Routines>
   <Flow>
     <Routine name="StandbyScreen"/>
-    <Routine name="CalibrateScales"/>
+    <Routine name="TareScales"/>
+    <Routine name="ReadScales"/>
     <Routine name="WelcomeScreen"/>
     <Routine name="Start_ramp"/>
     <Routine name="VASexercise1"/>
@@ -1338,12 +1473,14 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="rating_loop_rep_num" valType="num"/>
+      <Param name="nReps" updates="None" val="180" valType="num"/>
       <Param name="name" updates="None" val="rating_loop" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
     <Routine name="trial"/>
     <LoopTerminator name="rating_loop"/>
-    <Routine name="GoodbyScreen"/>
+    <Routine name="Hands_off"/>
+    <Routine name="Final_readScales"/>
+    <Routine name="Goodbye"/>
   </Flow>
 </PsychoPy2experiment>
