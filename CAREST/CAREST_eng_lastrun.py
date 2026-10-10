@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.1.4),
-    on Oktober 10, 2026, at 12:27
+    on Oktober 10, 2026, at 18:52
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -50,6 +50,8 @@ rating_duration = (
     + config.hold_time_pt
 )
 print(f"Rating duration: {rating_duration:.1f} s")
+rating_loop_repeats = int(rating_duration / 2)
+print(f"Maximum number of rating loop repeats: {rating_loop_repeats}")
 # Setup serial port for heat plate
 ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)
 ser.reset_input_buffer()
@@ -1688,7 +1690,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    rating_loop = data.TrialHandler(nReps=300.0, method='sequential', 
+    rating_loop = data.TrialHandler(nReps=rating_loop_repeats, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='rating_loop')
@@ -1901,7 +1903,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now
             thisSession.sendExperimentData()
-    # completed 300.0 repeats of 'rating_loop'
+    # completed rating_loop_repeats repeats of 'rating_loop'
     
     
     # --- Prepare to start Routine "Hands_off" ---

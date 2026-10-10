@@ -19,5 +19,4 @@ hold_time_bt = 120  		 # Time to hold at base temperature (adaptation)
 ramp_up_time_pt = 156        # Time to reach peak temperature (e.g. 156 s for heat pain, 280 s for cold pain experiments)
 hold_time_pt = 0             # Time to hold at peak temperature (e.g. 0 s for heat pain, 60 s for cold pain experiments)
 ramp_down_time_bt = 300      # Time to reach base temperature after peak
-
-# Make sure that the number of rating loop repeats times trial duration >= the sum of ramp_up and hold times. 
+ 
