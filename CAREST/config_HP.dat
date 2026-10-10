@@ -7,13 +7,17 @@ serial_port_HP = COM5		# COM port for controlling the heat plate
 serial_port_scales = COM4	# COM port for controlling the scales
 
 # --- Temperature Settings (in Celsius) ---
-base_temperature = 35.0      # Base temperature before start of experiment and during adaptation(limits: 10.0 - 45.0)
-peak_temperature = 47.0      # Peak temperature reached during the experiment (limits: 5.0 - 49.0) 
+base_temperature = 35.0      # Base temperature before start of experiment and during adaptation (limits: 10.0 - 45.0),
+#                              e.g. 35.0 for heat pain experiments, 25.0 for cold pain experiments
+peak_temperature = 47.0      # Peak temperature reached during the experiment (limits: 5.0 - 49.0), 
+#                              e.g. 47.0 for heat pain experiments, 5.0 for cold pain experiments
 
 # --- Timing Settings (in seconds) ---
 
 ramp_up_time_bt = 60		 # Time to reach base temperature
 hold_time_bt = 120  		 # Time to hold at base temperature (adaptation)
-ramp_up_time_pt = 156        # Time to reach peak temperature
-hold_time_pt = 0             # Time to hold at peak temperature
+ramp_up_time_pt = 156        # Time to reach peak temperature (e.g. 156 s for heat pain, 280 s for cold pain experiments)
+hold_time_pt = 0             # Time to hold at peak temperature (e.g. 0 s for heat pain, 60 s for cold pain experiments)
 ramp_down_time_bt = 300      # Time to reach base temperature after peak
+
+# Make sure that the number of rating loop repeats times trial duration >= the sum of ramp_up and hold times. 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.1.4),
-    on Oktober 09, 2026, at 16:03
+    on Oktober 09, 2026, at 20:45
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -39,10 +39,18 @@ import serial
 import time
 import struct
 import HP_commands_config as hpc
-newClock = core.Clock()
-# Setup serial port for heat plate
 # Load config file parameters
 config = hpc.load_config("config_HP.dat")
+# Calculate rating duration
+rating_clock = core.Clock()
+rating_duration = (
+    config.ramp_up_time_bt
+    + config.hold_time_bt
+    + config.ramp_up_time_pt
+    + config.hold_time_pt
+)
+print(f"Rating duration: {rating_duration:.1f} s")
+# Setup serial port for heat plate
 ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)
 ser.reset_input_buffer()
 ser.reset_output_buffer()
@@ -76,7 +84,7 @@ deviceManager = hardware.DeviceManager()
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
 psychopyVersion = '2024.1.4'
-expName = 'CAREST'  # from the Builder filename that created this script
+expName = 'CAREST_102_4'  # from the Builder filename that created this script
 # information about this experiment
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
@@ -167,7 +175,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\hstei\\Documents\\privat\\Anne\\Annes_Wissenschaft\\Psychopy\\ColdHeatPlate\\CAREST_102\\CAREST_lastrun.py',
+        originPath='C:\\Users\\hstei\\Documents\\privat\\Anne\\Annes_Wissenschaft\\Psychopy\\ColdHeatPlate\\CAREST_102\\CAREST_102_4_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -1021,6 +1029,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
        time.sleep(0.4)
        serscales.readline()
     hpc.Start_ramp(ser)
+    # Run 'Begin Routine' code from code_clockReset
+    rating_clock.reset()
     # keep track of which components have finished
     Start_rampComponents = [text_start_ramp]
     for thisComponent in Start_rampComponents:
@@ -1100,8 +1110,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     for thisComponent in Start_rampComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # Run 'End Routine' code from code_clockReset
-    newClock.reset()
     # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
     if routineForceEnded:
         routineTimer.reset()
@@ -1680,7 +1688,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    rating_loop = data.TrialHandler(nReps=180.0, method='sequential', 
+    rating_loop = data.TrialHandler(nReps=300.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='rating_loop')
@@ -1714,7 +1722,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         sliderRating.reset()
         slider_stop.reset()
         # Run 'Begin Routine' code from code_clockGetTime
-        if newClock.getTime() >= 360:
+        if rating_clock.getTime() >= rating_duration:
             rating_loop.finished = 1
         
         # keep track of which components have finished
@@ -1881,8 +1889,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             hpc.Stop_ramp(ser)
             
             rating_loop.finished = 1
-        # Run 'End Routine' code from code_clockGetTime
-        thisExp.saveAsWideText('CAREST_temporary_results', fileCollisionMethod='overwrite', delim=',')
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if routineForceEnded:
             routineTimer.reset()
@@ -1893,7 +1899,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now
             thisSession.sendExperimentData()
-    # completed 180.0 repeats of 'rating_loop'
+    # completed 300.0 repeats of 'rating_loop'
     
     
     # --- Prepare to start Routine "Hands_off" ---

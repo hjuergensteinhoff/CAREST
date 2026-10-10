@@ -44,7 +44,7 @@
     <Param val="False" valType="bool" updates="None" name="elSimMode"/>
     <Param val="RIGHT_EYE" valType="str" updates="None" name="elTrackEyes"/>
     <Param val="PUPIL_CR_TRACKING" valType="str" updates="None" name="elTrackingMode"/>
-    <Param val="CAREST" valType="str" updates="None" name="expName"/>
+    <Param val="CAREST_102_4" valType="str" updates="None" name="expName"/>
     <Param val="on Sync" valType="str" updates="None" name="exportHTML"/>
     <Param val="None" valType="str" updates="None" name="eyetracker"/>
     <Param val="60" valType="code" updates="None" name="frameRate"/>
@@ -235,15 +235,15 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((newClock.getTime() &gt;= 360)) {&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if newClock.getTime() &gt;= 360:&amp;#10;    rating_loop.finished = 1&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((rating_clock.getTime() &gt;= rating_duration)) {&amp;#10;    rating_loop.finished = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if rating_clock.getTime() &gt;= rating_duration:&amp;#10;    rating_loop.finished = 1&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="psychoJS.experiment.saveAsWideText(&quot;CAREST_temporary_results&quot;, {&quot;fileCollisionMethod&quot;: &quot;overwrite&quot;, &quot;delim&quot;: &quot;,&quot;});&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="thisExp.saveAsWideText('CAREST_temporary_results', fileCollisionMethod='overwrite', delim=',')" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_clockGetTime" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -645,15 +645,15 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="rating_clock.reset();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="rating_clock.reset()" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="newClock.reset();&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="newClock.reset()" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_clockReset" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -675,8 +675,8 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <CodeComponent name="code_bf_exp" plugin="None">
-        <Param val="# Version 1.0.2&amp;#10;import serial&amp;#10;import time&amp;#10;import struct&amp;#10;import HP_commands_config as hpc&amp;#10;newClock = core.Clock()&amp;#10;# Setup serial port for heat plate&amp;#10;# Load config file parameters&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;)&amp;#10;ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)&amp;#10;ser.reset_input_buffer()&amp;#10;ser.reset_output_buffer()&amp;#10;time.sleep(0.05)&amp;#10;# Setup serial port for scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales = serial.Serial(config.serial_port_scales, baudrate = 19200, timeout = 1)&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.05)&amp;#10;   # Bytes to tare and read the scales&amp;#10;   Scale_tare_byte = bytes([0x30])&amp;#10;   Scale_read_byte = bytes([0x0D])&amp;#10;   # Tare the scales&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;else:&amp;#10;   print(f&quot; Serial scales port is not available &quot;)&amp;#10;# Prepare the HP controller&amp;#10;# Stop ramp if still running from previous experiment&amp;#10;hpc.Stop_ramp(ser)&amp;#10;# Set and control to SV &amp;#10;hpc.Set_SV(ser, config)&amp;#10;hpc.Ctrl_tempON(ser)&amp;#10;# Set parameters for temperature ramp&amp;#10;hpc.Set_ramp_val(ser, config)" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="import * as serial from 'serial';&amp;#10;import * as time from 'time';&amp;#10;import * as struct from 'struct';&amp;#10;import * as hpc from 'HP_commands_config';&amp;#10;newClock = new util.Clock();&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;);&amp;#10;ser = new serial.Serial(config.serial_port_HP, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;ser.reset_input_buffer();&amp;#10;ser.reset_output_buffer();&amp;#10;time.sleep(0.05);&amp;#10;if (config.serial_port_scales) {&amp;#10;    serscales = new serial.Serial(config.serial_port_scales, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.05);&amp;#10;    Scale_tare_byte = bytes([48]);&amp;#10;    Scale_read_byte = bytes([13]);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;} else {&amp;#10;    console.log(` Serial scales port is not available `);&amp;#10;}&amp;#10;new hpc.Stop_ramp(ser);&amp;#10;new hpc.Set_SV(ser, config);&amp;#10;new hpc.Ctrl_tempON(ser);&amp;#10;new hpc.Set_ramp_val(ser, config);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="# Version 1.0.2&amp;#10;import serial&amp;#10;import time&amp;#10;import struct&amp;#10;import HP_commands_config as hpc&amp;#10;# Load config file parameters&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;)&amp;#10;# Calculate rating duration&amp;#10;rating_clock = core.Clock()&amp;#10;rating_duration = (&amp;#10;    config.ramp_up_time_bt&amp;#10;    + config.hold_time_bt&amp;#10;    + config.ramp_up_time_pt&amp;#10;    + config.hold_time_pt&amp;#10;)&amp;#10;print(f&quot;Rating duration: {rating_duration:.1f} s&quot;)&amp;#10;# Setup serial port for heat plate&amp;#10;ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)&amp;#10;ser.reset_input_buffer()&amp;#10;ser.reset_output_buffer()&amp;#10;time.sleep(0.05)&amp;#10;# Setup serial port for scales&amp;#10;if config.serial_port_scales:&amp;#10;   serscales = serial.Serial(config.serial_port_scales, baudrate = 19200, timeout = 1)&amp;#10;   serscales.reset_input_buffer()&amp;#10;   serscales.reset_output_buffer()&amp;#10;   time.sleep(0.05)&amp;#10;   # Bytes to tare and read the scales&amp;#10;   Scale_tare_byte = bytes([0x30])&amp;#10;   Scale_read_byte = bytes([0x0D])&amp;#10;   # Tare the scales&amp;#10;   serscales.write(Scale_tare_byte)&amp;#10;   serscales.flush()&amp;#10;else:&amp;#10;   print(f&quot; Serial scales port is not available &quot;)&amp;#10;# Prepare the HP controller&amp;#10;# Stop ramp if still running from previous experiment&amp;#10;hpc.Stop_ramp(ser)&amp;#10;# Set and control to SV &amp;#10;hpc.Set_SV(ser, config)&amp;#10;hpc.Ctrl_tempON(ser)&amp;#10;# Set parameters for temperature ramp&amp;#10;hpc.Set_ramp_val(ser, config)" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import * as serial from 'serial';&amp;#10;import * as time from 'time';&amp;#10;import * as struct from 'struct';&amp;#10;import * as hpc from 'HP_commands_config';&amp;#10;config = hpc.load_config(&quot;config_HP.dat&quot;);&amp;#10;rating_clock = new util.Clock();&amp;#10;rating_duration = (((config.ramp_up_time_bt + config.hold_time_bt) + config.ramp_up_time_pt) + config.hold_time_pt);&amp;#10;console.log(`Rating duration: ${util.pad(Number.parseFloat(rating_duration).toFixed(1), 1)} s`);&amp;#10;ser = new serial.Serial(config.serial_port_HP, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;ser.reset_input_buffer();&amp;#10;ser.reset_output_buffer();&amp;#10;time.sleep(0.05);&amp;#10;if (config.serial_port_scales) {&amp;#10;    serscales = new serial.Serial(config.serial_port_scales, {&quot;baudrate&quot;: 19200, &quot;timeout&quot;: 1});&amp;#10;    serscales.reset_input_buffer();&amp;#10;    serscales.reset_output_buffer();&amp;#10;    time.sleep(0.05);&amp;#10;    Scale_tare_byte = bytes([48]);&amp;#10;    Scale_read_byte = bytes([13]);&amp;#10;    serscales.write(Scale_tare_byte);&amp;#10;    serscales.flush();&amp;#10;} else {&amp;#10;    console.log(` Serial scales port is not available `);&amp;#10;}&amp;#10;new hpc.Stop_ramp(ser);&amp;#10;new hpc.Set_SV(ser, config);&amp;#10;new hpc.Ctrl_tempON(ser);&amp;#10;new hpc.Set_ramp_val(ser, config);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
@@ -1473,7 +1473,7 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="180" valType="num"/>
+      <Param name="nReps" updates="None" val="300" valType="num"/>
       <Param name="name" updates="None" val="rating_loop" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
