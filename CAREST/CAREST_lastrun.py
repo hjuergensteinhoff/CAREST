@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.1.4),
-    on Oktober 10, 2026, at 18:41
+    on Oktober 11, 2026, at 15:17
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -34,13 +34,16 @@ import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
 # Run 'Before Experiment' code from code_bf_exp
-# Version 1.0.2_4
 import serial
 import time
 import struct
+import shutil
 import HP_commands_config as hpc
+# CAREST version number
+carest_version = '1.0.2'
 # Load config file parameters
 config = hpc.load_config("config_HP.dat")
+source_config = 'config_HP.dat'
 # Calculate rating duration
 rating_clock = core.Clock()
 rating_duration = (
@@ -86,7 +89,7 @@ deviceManager = hardware.DeviceManager()
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
 psychopyVersion = '2024.1.4'
-expName = 'CAREST_102_4'  # from the Builder filename that created this script
+expName = 'CAREST'  # from the Builder filename that created this script
 # information about this experiment
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
@@ -167,7 +170,7 @@ def setupData(expInfo, dataDir=None):
     # data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
     if dataDir is None:
         dataDir = _thisDir
-    filename = u'data/%s_%s_%s' % (expInfo['participant'], expInfo['session'], expName)
+    filename = u'data/%s_%s_%s_%s' % (expInfo['participant'], expInfo['session'], expName, 'v1_0_2')
     # make sure filename is relative to dataDir
     if os.path.isabs(filename):
         dataDir = os.path.commonprefix([dataDir, filename])
@@ -177,7 +180,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\hstei\\Documents\\privat\\Anne\\Annes_Wissenschaft\\Psychopy\\ColdHeatPlate\\CAREST_102\\CAREST_102_4_lastrun.py',
+        originPath='C:\\Users\\hstei\\Documents\\privat\\Anne\\Annes_Wissenschaft\\Psychopy\\ColdHeatPlate\\CAREST_102\\CAREST_102_5\\CAREST_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -406,6 +409,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         labelColor='black', markerColor='Red', lineColor='White', colorSpace='rgb',
         font='Open Sans', labelHeight=0.05,
         flip=False, ori=0.0, depth=-2, readOnly=False)
+    # Run 'Begin Experiment' code from save_version
+    thisExp.addData('CAREST program version',carest_version)
     
     # --- Initialize components for Routine "TareScales" ---
     text_calibrateScales = visual.TextStim(win=win, name='text_calibrateScales',
@@ -2184,6 +2189,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.addData('Goodbye.stopped', globalClock.getTime(format='float'))
+    # Run 'End Routine' code from copy_config
+    # Output folder used for the experiment
+    output_folder = os.path.dirname(thisExp.dataFileName)
+    # New configuration filename
+    config_filename = (
+         f"sub_{expInfo['participant']}_{expInfo['session']}_config.dat"
+    )
+    # Full destination path
+    destination_config = output_folder + os.sep + config_filename
+    # Copy and rename the configuration file
+    shutil.copy2(source_config, destination_config)
     # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
     if routineForceEnded:
         routineTimer.reset()
