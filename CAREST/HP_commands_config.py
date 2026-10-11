@@ -1,7 +1,7 @@
 '''
 Heat_plate_commands_from_config_file 
 by Heinz-Juergen Steinhoff, University Osnabrueck, Germany.
-Version 7, April 2025
+Version 1.0.1, Jan 2026
 This code is to upload tailored data to an AHP-1200 heat/cold plate 
 (teca, Thermo Electric Cooling America Corporation) for temperature ramps 
 used in pain rating experiments according to the 
@@ -18,23 +18,6 @@ ramp_down_time_bt (300 s) the plate is reset to base_temperature SV.
 
 For checking the proper function of the plate the temperature ramp 
 can be started and the actual temperature values (PV) are printed every 2 seconds.
-
-Copyright (c) 2025 Heinz-Juergen Steinhoff and Annekatrin Steinhoff
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this 
-software and associated documentation files (the "Software"), to deal in the Software 
-without restriction, including without limitation the rights to use, copy, modify, merge, 
-publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
-to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or
-substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
-PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
-FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 '''
 
 import time
@@ -135,12 +118,17 @@ def list_available_ports():
 		
 def Stop_ramp(ser):
     Stop_ramp_bytes = bytes([0x01, 0x06, 0x00, 0x02, 0x00, 0x00, 0x28, 0x0A])
+    ser.reset_input_buffer()
     ser.write(Stop_ramp_bytes) # Stop ramp in case a previous one is still running
     ser.flush()
     time.sleep(0.05)
     response = ser.read(8)
     if len(response) != 8:
-        print("Error: Invalid response length for Stop_ramp_bytes, communication with heat plate failed")
+        print("Error: Invalid response length for Stop_ramp_bytes, communication with HP failed")
+        sys.exit()
+
+    if response != Stop_ramp_bytes:
+        print("Error: Response frame mismatch for Stop_ramp_bytes")
         sys.exit()
     else:
         print("Temperature ramp stopped")
@@ -190,12 +178,16 @@ def Set_SV(ser, config: ExperimentConfig):
 
 def Ctrl_tempON(ser):
     Ctrl_tempON_bytes = bytes([0x01, 0x06, 0x00, 0x02, 0x00, 0x04, 0x29, 0xC9]) # SPON
+    ser.reset_input_buffer()
     ser.write(Ctrl_tempON_bytes)
     ser.flush()
     time.sleep(0.05)
     response = ser.read(8)
     if len(response) != 8:
         print("Error: Invalid response length for Ctrl_tempON_bytes, communication with heat plate failed")
+        sys.exit()
+    if response != Ctrl_tempON_bytes:
+        print("Error: Response frame mismatch for Ctrl_tempON_bytes")
         sys.exit()
     else:
         print("Temperature controlled at SV")
@@ -314,30 +306,43 @@ def Set_ramp_val(ser, config: ExperimentConfig):
 
 def Start_ramp(ser):	
     Start_ramp_bytes = bytes([0x01, 0x06, 0x00, 0x02, 0x00, 0x05, 0xE8, 0x09])
+    ser.reset_input_buffer()
     ser.write(Start_ramp_bytes)
     ser.flush()
     time.sleep(0.05)
     response = ser.read(8)
+
     if len(response) != 8:
-        print("Error: Invalid response length for Start_ramp_bytes")
-        sys.exit()		
+        print("Error: Invalid response length for Start_ramp_bytes, communication with HP failed")
+        sys.exit()
+
+    if response != Start_ramp_bytes:
+        print("Error: Response frame mismatch for Start_ramp_bytes")
+        sys.exit()
+		
     else:
         print("Temperature ramp started")
     return
  
 def Read_temp(ser):
     Read_temp_bytes = bytes([0x01, 0x03, 0x10, 0x00, 0x00, 0x01, 0x80, 0xCA]) # temperature PV
+    ser.reset_input_buffer()
     ser.write(Read_temp_bytes)
     ser.flush()
-    time.sleep(0.05)		
+    time.sleep(0.05)
+
     PV_bytes = ser.read(8)
-    if len(PV_bytes) == 8:
-        byte5 = PV_bytes[4]
-        byte6 = PV_bytes[5]
-        PV_value = struct.unpack('>H', bytes([byte5, byte6]))[0]
-        PV = PV_value / 10
+    if len(PV_bytes) != 8:
+        print("Warning -100: Invalid response length for PV_Temperature_bytes")
+        PV = -100.0
     else:
-        PV = -100.
+        rx_crc = modbus_calc_crc(PV_bytes, 6)
+        if PV_bytes[6] == rx_crc[0] and PV_bytes[7] == rx_crc[1]:
+            PV_value = struct.unpack('>H', PV_bytes[4:6])[0]
+            PV = PV_value / 10
+        else:
+            print("Warning -101: Invalid CRC for PV_Temperature_bytes")
+            PV = -101.0
     return PV
 
 if __name__ == "__main__":
@@ -349,7 +354,7 @@ if __name__ == "__main__":
     config = load_config("config_HP.dat")
 
     # Setup serial port for heat plate
-    ser = serial.Serial(config.serial_port_HP, baudrate=19200, timeout=1)
+    ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)
     ser.reset_input_buffer()
     ser.reset_output_buffer()
 

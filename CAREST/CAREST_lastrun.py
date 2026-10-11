@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.1.4),
-    on August 19, 2025, at 12:31
+    on Oktober 11, 2026, at 15:17
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -34,15 +34,28 @@ import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
 # Run 'Before Experiment' code from code_bf_exp
-# v_19.08.2025
 import serial
 import time
 import struct
+import shutil
 import HP_commands_config as hpc
-newClock = core.Clock()
-# Setup serial port for heat plate
+# CAREST version number
+carest_version = '1.0.2'
 # Load config file parameters
 config = hpc.load_config("config_HP.dat")
+source_config = 'config_HP.dat'
+# Calculate rating duration
+rating_clock = core.Clock()
+rating_duration = (
+    config.ramp_up_time_bt
+    + config.hold_time_bt
+    + config.ramp_up_time_pt
+    + config.hold_time_pt
+)
+print(f"Rating duration: {rating_duration:.1f} s")
+rating_loop_repeats = int(rating_duration / 2)
+print(f"Maximum number of rating loop repeats: {rating_loop_repeats}")
+# Setup serial port for heat plate
 ser = serial.Serial(config.serial_port_HP, baudrate = 19200, timeout = 1)
 ser.reset_input_buffer()
 ser.reset_output_buffer()
@@ -69,15 +82,6 @@ hpc.Set_SV(ser, config)
 hpc.Ctrl_tempON(ser)
 # Set parameters for temperature ramp
 hpc.Set_ramp_val(ser, config)
-# Calculate total ramp_up_time
-ramp_up_time_total = (config.ramp_up_time_bt + 
-                     config.ramp_up_time_pt + 
-                     config.hold_time_bt + 
-                     config.hold_time_pt
-                     )
-print(f"The time from start to end of the temperature ramp is {ramp_up_time_total} s")
-rating_loop_rep_num = int(ramp_up_time_total / 2)
-print(f"The maximum number of repeats of the rating loop is {rating_loop_rep_num}")
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -166,7 +170,7 @@ def setupData(expInfo, dataDir=None):
     # data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
     if dataDir is None:
         dataDir = _thisDir
-    filename = u'data/%s_%s_%s' % (expInfo['participant'], expInfo['session'], expName)
+    filename = u'data/%s_%s_%s_%s' % (expInfo['participant'], expInfo['session'], expName, 'v1_0_2')
     # make sure filename is relative to dataDir
     if os.path.isabs(filename):
         dataDir = os.path.commonprefix([dataDir, filename])
@@ -176,7 +180,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\hstei\\Documents\\privat\\Anne\\Annes_Wissenschaft\\Psychopy\\CAREST_19_08_2025\\CAREST\\CAREST_lastrun.py',
+        originPath='C:\\Users\\hstei\\Documents\\privat\\Anne\\Annes_Wissenschaft\\Psychopy\\ColdHeatPlate\\CAREST_102\\CAREST_102_5\\CAREST_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -405,13 +409,24 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         labelColor='black', markerColor='Red', lineColor='White', colorSpace='rgb',
         font='Open Sans', labelHeight=0.05,
         flip=False, ori=0.0, depth=-2, readOnly=False)
+    # Run 'Begin Experiment' code from save_version
+    thisExp.addData('CAREST program version',carest_version)
     
-    # --- Initialize components for Routine "CalibrateScales" ---
+    # --- Initialize components for Routine "TareScales" ---
     text_calibrateScales = visual.TextStim(win=win, name='text_calibrateScales',
         text='Wärmeplatte nicht berühren!\n\nWägezellen werden kalibriert.',
         font='Open Sans',
         pos=(0, 0.1), height=0.08, wrapWidth=None, ori=0.0, 
-        color='black', colorSpace='rgb', opacity=None, 
+        color='red', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    
+    # --- Initialize components for Routine "ReadScales" ---
+    text_calibrateScales_2 = visual.TextStim(win=win, name='text_calibrateScales_2',
+        text='Wärmeplatte nicht berühren!\n\nWägezellen werden kalibriert.',
+        font='Open Sans',
+        pos=(0, 0.1), height=0.08, wrapWidth=None, ori=0.0, 
+        color='red', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     
@@ -557,11 +572,29 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         font='Open Sans', labelHeight=0.015,
         flip=False, ori=0.0, depth=-2, readOnly=False)
     
-    # --- Initialize components for Routine "GoodbyScreen" ---
-    text = visual.TextStim(win=win, name='text',
+    # --- Initialize components for Routine "Hands_off" ---
+    text_handsOff = visual.TextStim(win=win, name='text_handsOff',
+        text='Bitte die Hand von der Platte nehmen.',
+        font='Open Sans',
+        pos=(0, 0), height=0.08, wrapWidth=None, ori=0.0, 
+        color='black', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    
+    # --- Initialize components for Routine "Final_readScales" ---
+    text_readScales = visual.TextStim(win=win, name='text_readScales',
+        text='Wärmeplatte nicht berühren!\n\nWägezellen werden ausgelesen.',
+        font='Open Sans',
+        pos=(0, 0), height=0.08, wrapWidth=None, ori=0.0, 
+        color='red', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    
+    # --- Initialize components for Routine "Goodbye" ---
+    text_Goodbye = visual.TextStim(win=win, name='text_Goodbye',
         text='Danke für die Teilnahme!',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=0.08, wrapWidth=None, ori=0.0, 
         color='black', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -691,12 +724,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # the Routine "StandbyScreen" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
-    # --- Prepare to start Routine "CalibrateScales" ---
+    # --- Prepare to start Routine "TareScales" ---
     continueRoutine = True
     # update component parameters for each repeat
     # keep track of which components have finished
-    CalibrateScalesComponents = [text_calibrateScales]
-    for thisComponent in CalibrateScalesComponents:
+    TareScalesComponents = [text_calibrateScales]
+    for thisComponent in TareScalesComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
         thisComponent.tStartRefresh = None
@@ -708,9 +741,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     _timeToFirstFrame = win.getFutureFlipTime(clock="now")
     frameN = -1
     
-    # --- Run Routine "CalibrateScales" ---
+    # --- Run Routine "TareScales" ---
     routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 5.0:
+    while continueRoutine and routineTimer.getTime() < 3.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -739,7 +772,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # if text_calibrateScales is stopping this frame...
         if text_calibrateScales.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text_calibrateScales.tStartRefresh + 5-frameTolerance:
+            if tThisFlipGlobal > text_calibrateScales.tStartRefresh + 3-frameTolerance:
                 # keep track of stop time/frame for later
                 text_calibrateScales.tStop = t  # not accounting for scr refresh
                 text_calibrateScales.tStopRefresh = tThisFlipGlobal  # on global time
@@ -760,7 +793,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             routineForceEnded = True
             break
         continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in CalibrateScalesComponents:
+        for thisComponent in TareScalesComponents:
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
@@ -769,11 +802,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
     
-    # --- Ending Routine "CalibrateScales" ---
-    for thisComponent in CalibrateScalesComponents:
+    # --- Ending Routine "TareScales" ---
+    for thisComponent in TareScalesComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # Run 'End Routine' code from code_calibrateScales
+    # Run 'End Routine' code from code_tareScales
     # Tare the scales
     if config.serial_port_scales:
        serscales.reset_input_buffer()
@@ -786,7 +819,112 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     if routineForceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-5.000000)
+        routineTimer.addTime(-3.000000)
+    thisExp.nextEntry()
+    
+    # --- Prepare to start Routine "ReadScales" ---
+    continueRoutine = True
+    # update component parameters for each repeat
+    thisExp.addData('ReadScales.started', globalClock.getTime(format='float'))
+    # keep track of which components have finished
+    ReadScalesComponents = [text_calibrateScales_2]
+    for thisComponent in ReadScalesComponents:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "ReadScales" ---
+    routineForceEnded = not continueRoutine
+    while continueRoutine and routineTimer.getTime() < 3.0:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *text_calibrateScales_2* updates
+        
+        # if text_calibrateScales_2 is starting this frame...
+        if text_calibrateScales_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            text_calibrateScales_2.frameNStart = frameN  # exact frame index
+            text_calibrateScales_2.tStart = t  # local t and not account for scr refresh
+            text_calibrateScales_2.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(text_calibrateScales_2, 'tStartRefresh')  # time at next scr refresh
+            # update status
+            text_calibrateScales_2.status = STARTED
+            text_calibrateScales_2.setAutoDraw(True)
+        
+        # if text_calibrateScales_2 is active this frame...
+        if text_calibrateScales_2.status == STARTED:
+            # update params
+            pass
+        
+        # if text_calibrateScales_2 is stopping this frame...
+        if text_calibrateScales_2.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > text_calibrateScales_2.tStartRefresh + 3-frameTolerance:
+                # keep track of stop time/frame for later
+                text_calibrateScales_2.tStop = t  # not accounting for scr refresh
+                text_calibrateScales_2.tStopRefresh = tThisFlipGlobal  # on global time
+                text_calibrateScales_2.frameNStop = frameN  # exact frame index
+                # update status
+                text_calibrateScales_2.status = FINISHED
+                text_calibrateScales_2.setAutoDraw(False)
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in ReadScalesComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "ReadScales" ---
+    for thisComponent in ReadScalesComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    thisExp.addData('ReadScales.stopped', globalClock.getTime(format='float'))
+    # Run 'End Routine' code from first_readScales
+    # Read the scales for the first time
+    if config.serial_port_scales:
+       serscales.reset_input_buffer()
+       time.sleep(0.1)
+       serscales.write(Scale_read_byte)
+       serscales.flush()
+       time.sleep(0.1)
+       cf_bytes_read = serscales.readline()
+       decoded_cf_string = cf_bytes_read.decode('latin-1')
+       cleaned_cf_string = decoded_cf_string.strip()
+       thisExp.addData('first_contact_force', cleaned_cf_string)
+    else:
+       thisExp.addData('first_contact_force', None)
+    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+    if routineForceEnded:
+        routineTimer.reset()
+    else:
+        routineTimer.addTime(-3.000000)
     thisExp.nextEntry()
     
     # --- Prepare to start Routine "WelcomeScreen" ---
@@ -898,6 +1036,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
        time.sleep(0.4)
        serscales.readline()
     hpc.Start_ramp(ser)
+    # Run 'Begin Routine' code from code_clockReset
+    rating_clock.reset()
     # keep track of which components have finished
     Start_rampComponents = [text_start_ramp]
     for thisComponent in Start_rampComponents:
@@ -977,8 +1117,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     for thisComponent in Start_rampComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # Run 'End Routine' code from code_clockReset
-    newClock.reset()
     # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
     if routineForceEnded:
         routineTimer.reset()
@@ -1557,7 +1695,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    rating_loop = data.TrialHandler(nReps=rating_loop_rep_num, method='sequential', 
+    rating_loop = data.TrialHandler(nReps=rating_loop_repeats, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='rating_loop')
@@ -1591,8 +1729,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         sliderRating.reset()
         slider_stop.reset()
         # Run 'Begin Routine' code from code_clockGetTime
-        if newClock.getTime() >= ramp_up_time_total:
+        if rating_clock.getTime() >= rating_duration:
             rating_loop.finished = 1
+        
         # keep track of which components have finished
         trialComponents = [imageSliderRating, sliderRating, slider_stop]
         for thisComponent in trialComponents:
@@ -1755,6 +1894,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         #Finish experiment with slider_stop
         if slider_stop.getRating() == 2 :
             hpc.Stop_ramp(ser)
+            
             rating_loop.finished = 1
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if routineForceEnded:
@@ -1766,16 +1906,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now
             thisSession.sendExperimentData()
-    # completed rating_loop_rep_num repeats of 'rating_loop'
+    # completed rating_loop_repeats repeats of 'rating_loop'
     
     
-    # --- Prepare to start Routine "GoodbyScreen" ---
+    # --- Prepare to start Routine "Hands_off" ---
     continueRoutine = True
     # update component parameters for each repeat
-    thisExp.addData('GoodbyScreen.started', globalClock.getTime(format='float'))
+    thisExp.addData('Hands_off.started', globalClock.getTime(format='float'))
     # keep track of which components have finished
-    GoodbyScreenComponents = [text]
-    for thisComponent in GoodbyScreenComponents:
+    Hands_offComponents = [text_handsOff]
+    for thisComponent in Hands_offComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
         thisComponent.tStartRefresh = None
@@ -1787,7 +1927,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     _timeToFirstFrame = win.getFutureFlipTime(clock="now")
     frameN = -1
     
-    # --- Run Routine "GoodbyScreen" ---
+    # --- Run Routine "Hands_off" ---
     routineForceEnded = not continueRoutine
     while continueRoutine and routineTimer.getTime() < 10.0:
         # get current time
@@ -1797,39 +1937,35 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
-        # *text* updates
+        # *text_handsOff* updates
         
-        # if text is starting this frame...
-        if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # if text_handsOff is starting this frame...
+        if text_handsOff.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            text.frameNStart = frameN  # exact frame index
-            text.tStart = t  # local t and not account for scr refresh
-            text.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'text.started')
+            text_handsOff.frameNStart = frameN  # exact frame index
+            text_handsOff.tStart = t  # local t and not account for scr refresh
+            text_handsOff.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(text_handsOff, 'tStartRefresh')  # time at next scr refresh
             # update status
-            text.status = STARTED
-            text.setAutoDraw(True)
+            text_handsOff.status = STARTED
+            text_handsOff.setAutoDraw(True)
         
-        # if text is active this frame...
-        if text.status == STARTED:
+        # if text_handsOff is active this frame...
+        if text_handsOff.status == STARTED:
             # update params
             pass
         
-        # if text is stopping this frame...
-        if text.status == STARTED:
+        # if text_handsOff is stopping this frame...
+        if text_handsOff.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text.tStartRefresh + 10.0-frameTolerance:
+            if tThisFlipGlobal > text_handsOff.tStartRefresh + 10.0-frameTolerance:
                 # keep track of stop time/frame for later
-                text.tStop = t  # not accounting for scr refresh
-                text.tStopRefresh = tThisFlipGlobal  # on global time
-                text.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'text.stopped')
+                text_handsOff.tStop = t  # not accounting for scr refresh
+                text_handsOff.tStopRefresh = tThisFlipGlobal  # on global time
+                text_handsOff.frameNStop = frameN  # exact frame index
                 # update status
-                text.status = FINISHED
-                text.setAutoDraw(False)
+                text_handsOff.status = FINISHED
+                text_handsOff.setAutoDraw(False)
         
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1843,7 +1979,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             routineForceEnded = True
             break
         continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in GoodbyScreenComponents:
+        for thisComponent in Hands_offComponents:
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
@@ -1852,11 +1988,218 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
     
-    # --- Ending Routine "GoodbyScreen" ---
-    for thisComponent in GoodbyScreenComponents:
+    # --- Ending Routine "Hands_off" ---
+    for thisComponent in Hands_offComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    thisExp.addData('GoodbyScreen.stopped', globalClock.getTime(format='float'))
+    thisExp.addData('Hands_off.stopped', globalClock.getTime(format='float'))
+    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+    if routineForceEnded:
+        routineTimer.reset()
+    else:
+        routineTimer.addTime(-10.000000)
+    thisExp.nextEntry()
+    
+    # --- Prepare to start Routine "Final_readScales" ---
+    continueRoutine = True
+    # update component parameters for each repeat
+    thisExp.addData('Final_readScales.started', globalClock.getTime(format='float'))
+    # keep track of which components have finished
+    Final_readScalesComponents = [text_readScales]
+    for thisComponent in Final_readScalesComponents:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "Final_readScales" ---
+    routineForceEnded = not continueRoutine
+    while continueRoutine and routineTimer.getTime() < 5.0:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *text_readScales* updates
+        
+        # if text_readScales is starting this frame...
+        if text_readScales.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            text_readScales.frameNStart = frameN  # exact frame index
+            text_readScales.tStart = t  # local t and not account for scr refresh
+            text_readScales.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(text_readScales, 'tStartRefresh')  # time at next scr refresh
+            # update status
+            text_readScales.status = STARTED
+            text_readScales.setAutoDraw(True)
+        
+        # if text_readScales is active this frame...
+        if text_readScales.status == STARTED:
+            # update params
+            pass
+        
+        # if text_readScales is stopping this frame...
+        if text_readScales.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > text_readScales.tStartRefresh + 5.0-frameTolerance:
+                # keep track of stop time/frame for later
+                text_readScales.tStop = t  # not accounting for scr refresh
+                text_readScales.tStopRefresh = tThisFlipGlobal  # on global time
+                text_readScales.frameNStop = frameN  # exact frame index
+                # update status
+                text_readScales.status = FINISHED
+                text_readScales.setAutoDraw(False)
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in Final_readScalesComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "Final_readScales" ---
+    for thisComponent in Final_readScalesComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    thisExp.addData('Final_readScales.stopped', globalClock.getTime(format='float'))
+    # Run 'End Routine' code from last_readScales
+    # Read the scales for the last time
+    if config.serial_port_scales:
+       serscales.reset_input_buffer()
+       time.sleep(0.1)
+       serscales.write(Scale_read_byte)
+       serscales.flush()
+       time.sleep(0.1)
+       cf_bytes_read = serscales.readline()
+       decoded_cf_string = cf_bytes_read.decode('latin-1')
+       cleaned_cf_string = decoded_cf_string.strip()
+       thisExp.addData('last_contact_force', cleaned_cf_string)
+    else:
+       thisExp.addData('last_contact_force', None)
+    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+    if routineForceEnded:
+        routineTimer.reset()
+    else:
+        routineTimer.addTime(-5.000000)
+    thisExp.nextEntry()
+    
+    # --- Prepare to start Routine "Goodbye" ---
+    continueRoutine = True
+    # update component parameters for each repeat
+    thisExp.addData('Goodbye.started', globalClock.getTime(format='float'))
+    # keep track of which components have finished
+    GoodbyeComponents = [text_Goodbye]
+    for thisComponent in GoodbyeComponents:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "Goodbye" ---
+    routineForceEnded = not continueRoutine
+    while continueRoutine and routineTimer.getTime() < 10.0:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *text_Goodbye* updates
+        
+        # if text_Goodbye is starting this frame...
+        if text_Goodbye.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            text_Goodbye.frameNStart = frameN  # exact frame index
+            text_Goodbye.tStart = t  # local t and not account for scr refresh
+            text_Goodbye.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(text_Goodbye, 'tStartRefresh')  # time at next scr refresh
+            # update status
+            text_Goodbye.status = STARTED
+            text_Goodbye.setAutoDraw(True)
+        
+        # if text_Goodbye is active this frame...
+        if text_Goodbye.status == STARTED:
+            # update params
+            pass
+        
+        # if text_Goodbye is stopping this frame...
+        if text_Goodbye.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > text_Goodbye.tStartRefresh + 10.0-frameTolerance:
+                # keep track of stop time/frame for later
+                text_Goodbye.tStop = t  # not accounting for scr refresh
+                text_Goodbye.tStopRefresh = tThisFlipGlobal  # on global time
+                text_Goodbye.frameNStop = frameN  # exact frame index
+                # update status
+                text_Goodbye.status = FINISHED
+                text_Goodbye.setAutoDraw(False)
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in GoodbyeComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "Goodbye" ---
+    for thisComponent in GoodbyeComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    thisExp.addData('Goodbye.stopped', globalClock.getTime(format='float'))
+    # Run 'End Routine' code from copy_config
+    # Output folder used for the experiment
+    output_folder = os.path.dirname(thisExp.dataFileName)
+    # New configuration filename
+    config_filename = (
+         f"sub_{expInfo['participant']}_{expInfo['session']}_config.dat"
+    )
+    # Full destination path
+    destination_config = output_folder + os.sep + config_filename
+    # Copy and rename the configuration file
+    shutil.copy2(source_config, destination_config)
     # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
     if routineForceEnded:
         routineTimer.reset()
