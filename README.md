@@ -33,7 +33,8 @@ https://doi.org/10.3758/s13428-018-01193-y
 
 You can download specific versions directly here:
 
-- [Download v1.0.1 (latest)](https://github.com/hjuergensteinhoff/CAREST/archive/refs/tags/v1.0.1.zip)
+- [Download v1.0.2 (latest)](https://github.com/hjuergensteinhoff/CAREST/archive/refs/tags/v1.0.2.zip)
+- [Download v1.0.1 (previous)](https://github.com/hjuergensteinhoff/CAREST/archive/refs/tags/v1.0.1.zip)
 - [Download v1.0.0 (previous)](https://github.com/hjuergensteinhoff/CAREST/archive/refs/tags/v1.0.0.zip)
 
 For all versions, see the [Releases page](https://github.com/hjuergensteinhoff/CAREST/releases).
